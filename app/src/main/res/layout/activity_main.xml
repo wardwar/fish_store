@@ -6,9 +6,82 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="56dp"-->
-<!--        android:background="@color/colorPrimary"/>-->
+    <TextView
+        android:id="@+id/mainTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/main_text_name"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mainTextSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/main_text_sub"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainTextName" />
+
+    <EditText
+        android:id="@+id/mainInputSearch"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/search_field_bg"
+        android:drawableStart="@drawable/ic_twotone_search_24"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/poppins"
+        android:hint="@string/hint_search_bar"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorSecondaryText"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/mainBtnFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainTextSub" />
+
+    <ImageButton
+        android:id="@+id/mainBtnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_button_tint"
+        android:src="@drawable/ic_twotone_filter_list_24"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/mainInputSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mainInputSearch" />
+
+    <TextView
+        android:id="@+id/mainLabelSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_label_selection"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintTop_toBottomOf="@id/mainInputSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/mainLabelSelection"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

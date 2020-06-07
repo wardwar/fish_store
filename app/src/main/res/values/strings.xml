@@ -1,2 +1,6 @@
 <resources>
+    <string name="main_text_sub">Temukan ikan Segar disini!</string>
+    <string name="main_text_name">Hi Wildan</string>
+    <string name="hint_search_bar">Cari ikan lain</string>
+    <string name="main_label_selection">Ikan pilihan semua orang</string>
 </resources>

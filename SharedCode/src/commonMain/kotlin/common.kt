@@ -6,7 +6,6 @@ import com.squareup.sqldelight.db.SqlDriver
 
 
 expect fun platformName():String
-expect val driver : SqlDriver
 
 fun createApplicationScreenMessage() : String {
     return "Kotlin code base on ${platformName()}"
