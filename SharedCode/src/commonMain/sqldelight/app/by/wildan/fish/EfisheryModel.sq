@@ -1,0 +1,16 @@
+
+CREATE TABLE EfisheryStore (
+    uuid TEXT,
+    size TEXT,
+    komoditas TEXT,
+    area_provinsi TEXT,
+    area_kota TEXT,
+    price TEXT,
+    tgl_parsed TEXT,
+    timestamp TEXT
+);
+insertItem:
+INSERT OR FAIL INTO EfisheryStore(uuid, size,komoditas,area_provinsi,area_kota,price,tgl_parsed,timestamp) VALUES (?, ?,?,?,?,?,?,?);
+selectAll:
+SELECT *
+FROM EfisheryStore;
