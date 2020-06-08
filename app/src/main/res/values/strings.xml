@@ -12,4 +12,10 @@
     <string name="slide_up_btn_filter">Terapkan Filter</string>
     <string name="main_btn_add">Tambah Data</string>
     <string name="slide_up_add_label">Tambah Produk</string>
+    <string name="comudity">Komuditas</string>
+    <string name="provinsi_area">Provinsi Area</string>
+    <string name="kota_area">Kota Area</string>
+    <string name="ukuran_gramasi">Ukuran gramasi</string>
+    <string name="harga">Harga</string>
+    <string name="slide_up_btn_add">Tambah Barang</string>
 </resources>

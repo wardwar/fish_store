@@ -20,9 +20,21 @@ class ApiClient(private val engine: HttpClientEngine) {
         }
     }
 
-    suspend fun fetchStoreItemList(): List<StoreItem> {
+    suspend fun fetchStoreItemList(): List<Product> {
         return client.get {
             url("$baseUrl/list")
+        }
+    }
+
+    suspend fun fetchArea(): List<OptionArea> {
+        return client.get {
+            url("$baseUrl/option_area")
+        }
+    }
+
+    suspend fun fetchSize(): List<OptionSize> {
+        return client.get {
+            url("$baseUrl/option_size")
         }
     }
 

@@ -1,12 +1,12 @@
 package app.by.wildan.efisherystore.pages
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import app.by.wildan.efisherystore.R
+import app.by.wildan.efisherystore.data.entity.Product
+import app.by.wildan.efisherystore.data.entity.priceGram
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product.view.*
 
@@ -44,7 +44,7 @@ class SelectedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                 R.drawable.nila
             )
             Picasso.get().load(fishImage.random()).into(itemProductImage)
-            itemProductNameText.text = item.komuditi
+            itemProductNameText.text = item.komoditas
             itemProductPriceText.text = item.priceGram
         }
     }
