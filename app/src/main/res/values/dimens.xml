@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="wrapper">24dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_hight">500dp</dimen>
+    <dimen name="container">16dp</dimen>
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="space_initial">16dp</dimen>
+    <dimen name="space_body">6dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
+    <dimen name="margin_bottom_player">100dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+    <dimen name="dp18">18dp</dimen>
+    <dimen name="dp20">24dp</dimen>
+    <dimen name="dp10">10dp</dimen>
+    <dimen name="dp3">3dp</dimen>
+    <dimen name="dp8">8dp</dimen>
+    <dimen name="dp4">4dp</dimen>
+    <dimen name="dp6">6dp</dimen>
+    <dimen name="dp9">9dp</dimen>
+    <dimen name="dp16">16dp</dimen>
+    <dimen name="dp105">105dp</dimen>
+
+</resources>

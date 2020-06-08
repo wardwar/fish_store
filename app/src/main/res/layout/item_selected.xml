@@ -2,16 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="0dp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/itemProductBackground"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        >
+        android:layout_width="150dp"
+        android:layout_height="175dp"
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/itemProductImage"
@@ -42,25 +41,9 @@
             android:fontFamily="@font/poppins_medium"
             android:textColor="@android:color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/itemProductBtnBuy"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Rp.50.000 / 50 gr" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/itemProductBtnBuy"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:backgroundTint="@color/colorAccent"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/beli"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            app:cornerRadius="0dp"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
