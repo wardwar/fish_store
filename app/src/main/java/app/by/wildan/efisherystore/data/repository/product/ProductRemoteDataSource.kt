@@ -8,7 +8,6 @@ import app.by.wildan.mobile.Product
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 class ProductRemoteDataSource(
     private val api: ApiClient,
@@ -21,6 +20,19 @@ class ProductRemoteDataSource(
                 val result = api.fetchStoreItemList()
                 Result.Success(result)
             } catch (e: Exception) {
+                e.printStackTrace()
+                Result.Error(e)
+            }
+        }
+    }
+
+    suspend fun postProduct(product: Product):Result<String>{
+        return withContext(dispatcher) {
+            try {
+                val result = api.postProduct(product)
+                Result.Success(result)
+            } catch (e: Exception) {
+                e.printStackTrace()
                 Result.Error(e)
             }
         }
@@ -31,7 +43,8 @@ class ProductRemoteDataSource(
             try {
                 val result = api.fetchArea()
                 Result.Success(result)
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
+                e.printStackTrace()
                 Result.Error(e)
             }
         }
@@ -42,7 +55,8 @@ class ProductRemoteDataSource(
             try {
                 val result = api.fetchSize()
                 Result.Success(result)
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
+                e.printStackTrace()
                 Result.Error(e)
             }
         }

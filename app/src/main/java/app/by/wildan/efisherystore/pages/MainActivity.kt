@@ -1,7 +1,10 @@
 package app.by.wildan.efisherystore.pages
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -11,11 +14,15 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import app.by.wildan.efisherystore.EventObserver
 import app.by.wildan.efisherystore.R
+import app.by.wildan.efisherystore.data.entity.OptionArea
+import app.by.wildan.efisherystore.data.entity.OptionSize
 import app.by.wildan.efisherystore.data.entity.Product
 import app.by.wildan.efisherystore.decorator.DecoratorRecyclerViewHorizontal
 import app.by.wildan.efisherystore.decorator.GridDecorator
 import app.by.wildan.efisherystore.utils.hideKeyboardFrom
+import app.by.wildan.efisherystore.utils.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +30,8 @@ import kotlinx.android.synthetic.main.add_layout.*
 import kotlinx.android.synthetic.main.filter_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.util.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private val productViewModel: ProductViewModel by viewModel()
@@ -40,20 +49,9 @@ class MainActivity : AppCompatActivity() {
     private var isOnSearch = false
 
     private val productDataHolder = mutableListOf<Product>()
+    private val sizeDataHolder = mutableListOf<OptionSize>()
+    private val areaDataHolder = mutableListOf<OptionArea>()
 
-//    val areas = listOf(
-//        OptionArea("BANTENT","PANDEGLANG"),
-//        OptionArea("DKI JAKARTA","JAKARTA PUSAT"),
-//        OptionArea("DKI JAKARTA","JAKARTA UTARA"),
-//        OptionArea("DKI JAKARTA","JAKARTA BARAT")
-//        )
-//    val sizes = listOf(
-//        OptionSize("100"),
-//        OptionSize("200"),
-//        OptionSize("300"),
-//        OptionSize("400"),
-//        OptionSize("500")
-//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -221,22 +219,75 @@ class MainActivity : AppCompatActivity() {
         addBehavior = BottomSheetBehavior.from(bottomSheetAdd)
         mainBtnAdd.setOnClickListener {
             addBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
-//        }
-//
-//        val provinceAdapter = ArrayAdapter(this, R.layout.list_item, areas.distinctBy { it.province }.map { it.province })
-//        (slideUpAddInputProvince.editText as? AutoCompleteTextView)?.setAdapter(provinceAdapter)
-//
-//        slideUpAddInputProvince.editText?.addTextChangedListener {
-//            val city = areas.filter { it.province == slideUpAddInputProvince.editText?.text.toString()}.map { it.city }
-//            val cityAdapter = ArrayAdapter(this, R.layout.list_item, city )
-//            (slideUpAddInputCity.editText as? AutoCompleteTextView)?.setAdapter(cityAdapter)
-//
-//        }
-//
-//        val sizeAdapter = ArrayAdapter(this, R.layout.list_item, sizes.map { it.size })
-//        (slideUpAddInputSize.editText as? AutoCompleteTextView)?.setAdapter(sizeAdapter)
         }
+
+        productViewModel.getArea {
+            it.observe(this, Observer {
+                areaDataHolder.apply {
+                    clear()
+                    addAll(it)
+                }
+
+                val provinceAdapter = ArrayAdapter(
+                    this,
+                    R.layout.list_item,
+                    areaDataHolder.distinctBy { it.province }.map { it.province })
+                (slideUpAddInputProvince.editText as? AutoCompleteTextView)?.setAdapter(
+                    provinceAdapter
+                )
+
+                slideUpAddInputProvince.editText?.addTextChangedListener {
+                    val city =
+                        areaDataHolder.filter { it.province == slideUpAddInputProvince.editText?.text.toString() }
+                            .map { it.city?:"" }
+                        println(city)
+                    val cityAdapter = ArrayAdapter(this, R.layout.list_item, city)
+                    (slideUpAddInputCity.editText as? AutoCompleteTextView)?.setAdapter(cityAdapter)
+
+                }
+            })
+
+        }
+        productViewModel.getSize {
+            it.observe(this, Observer {
+                sizeDataHolder.apply {
+                    clear()
+                    addAll(it)
+                }
+                val sizeAdapter =
+                    ArrayAdapter(this, R.layout.list_item, sizeDataHolder.map { it.size })
+                (slideUpAddInputSize.editText as? AutoCompleteTextView)?.setAdapter(sizeAdapter)
+            })
+
+        }
+
+        slideUpBtnAdd.setOnClickListener {
+            productViewModel.postProduct(
+                app.by.wildan.mobile.Product(
+                    Random(15).toString(),
+                    selideUpAddInputComudity.editText?.text.toString(),
+                    slideUpAddInputProvince.editText?.text.toString(),
+                    slideUpAddInputCity.editText?.text.toString(),
+                    slideUpAddInputSize.editText?.text.toString(),
+                    slideUpAddInputPrice.editText?.text.toString(),
+                    Calendar.getInstance().time.toString(),
+                    Calendar.getInstance().timeInMillis.toString()
+                    )
+            )
+        }
+
+        productViewModel._eventPostProduct.observe(this,EventObserver{
+            toast(it)
+
+            if(it == "success"){
+                addBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                hideKeyboardFrom(this,bottomSheetAdd)
+                productViewModel.updateData()
+            }
+        })
+
     }
+
 
     fun filterProduct() {
         val filterArea = slideUpChipGroupArea.children.filter {

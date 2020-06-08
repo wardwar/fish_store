@@ -4,10 +4,16 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.get
+import io.ktor.client.request.post
 import io.ktor.client.request.url
+import io.ktor.http.ContentType
+import io.ktor.http.Parameters
+import io.ktor.http.contentType
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
+import kotlin.random.Random
 
 
 class ApiClient(private val engine: HttpClientEngine) {
@@ -35,6 +41,15 @@ class ApiClient(private val engine: HttpClientEngine) {
     suspend fun fetchSize(): List<OptionSize> {
         return client.get {
             url("$baseUrl/option_size")
+        }
+    }
+
+    suspend fun postProduct(product:Product) :String{
+        return client.post{
+            println("Sedang Request Data")
+            url("$baseUrl/list")
+            contentType(ContentType.Application.Json)
+            body = listOf(product)
         }
     }
 

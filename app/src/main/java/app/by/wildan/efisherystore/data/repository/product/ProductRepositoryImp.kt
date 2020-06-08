@@ -49,7 +49,7 @@ class ProductRepositoryImp(
     override suspend fun getArea(): LiveData<List<OptionArea>> {
         val data = remoteDataSource.getArea()
         if (data is Result.Success) {
-            val transform = data.data.filter { it.province.isNullOrEmpty() }.withIndex().map {
+            val transform = data.data.filter { !it.province.isNullOrEmpty() }.withIndex().map {
                 OptionArea(
                     it.index.toString(),
                     it.value.province,
@@ -59,5 +59,9 @@ class ProductRepositoryImp(
             localDataSource.insertArea(transform)
         }
         return localDataSource.areaList
+    }
+
+    override suspend fun addProduct(product: app.by.wildan.mobile.Product): Result<String> {
+        return remoteDataSource.postProduct(product)
     }
 }
