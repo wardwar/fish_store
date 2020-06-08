@@ -14,11 +14,11 @@ import kotlinx.coroutines.launch
 
 class ProductViewModel(private val productRepository: ProductRepository) : ViewModel() {
 
-    val _eventPostProduct = MutableLiveData<Event<String>>()
-    private val eventPostProduct :LiveData<Event<String>> = _eventPostProduct
+    private val _eventPostProduct = MutableLiveData<Event<String>>()
+     val eventPostProduct :LiveData<Event<String>> = _eventPostProduct
 
-    val _loadingState = MutableLiveData<Event<Boolean>>()
-    private val loadingState :LiveData<Event<Boolean>> = _loadingState
+    private val _loadingState = MutableLiveData<Event<Boolean>>()
+     val loadingState :LiveData<Event<Boolean>> = _loadingState
 
     fun updateData() {
         viewModelScope.launch {
@@ -30,9 +30,7 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
 
     fun getProduct(continuation: (LiveData<List<Product>>) -> Unit) {
         viewModelScope.launch {
-            _loadingState.value = Event(true)
             continuation(productRepository.getProduct())
-            _loadingState.value = Event(false)
         }
     }
 
@@ -50,9 +48,9 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
 
     fun postProduct(payload : app.by.wildan.mobile.Product) {
         viewModelScope.launch {
-            println("memanggil data")
+            _loadingState.value = Event(true)
             val result = productRepository.addProduct(payload)
-            println("data terpanggil")
+            _loadingState.value = Event(false)
 
             when(result){
                 is Result.Success ->{

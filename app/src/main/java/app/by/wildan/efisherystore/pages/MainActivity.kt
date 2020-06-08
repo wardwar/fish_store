@@ -21,6 +21,7 @@ import app.by.wildan.efisherystore.data.entity.OptionSize
 import app.by.wildan.efisherystore.data.entity.Product
 import app.by.wildan.efisherystore.decorator.DecoratorRecyclerViewHorizontal
 import app.by.wildan.efisherystore.decorator.GridDecorator
+import app.by.wildan.efisherystore.dialog.LoadingDialog
 import app.by.wildan.efisherystore.utils.hideKeyboardFrom
 import app.by.wildan.efisherystore.utils.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -60,6 +61,11 @@ class MainActivity : AppCompatActivity() {
         setupList()
 
         setupAdd()
+
+        val loading = LoadingDialog(this)
+        productViewModel.loadingState.observe(this,EventObserver{
+            loading.perform(it)
+        })
     }
 
     fun setupList(){
@@ -97,6 +103,11 @@ class MainActivity : AppCompatActivity() {
                 setupSearch()
                 selectionAdapter.notifyDataSetChanged(it.take(5))
                 productAdapter.notifyDataSetChanged(it)
+                mainShimmerProduct.visibility = View.GONE
+                mainShimmerSelection.visibility = View.GONE
+
+                mainListProduct.visibility = View.VISIBLE
+                mainListSelection.visibility = View.VISIBLE
             })
         }
 
@@ -276,7 +287,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        productViewModel._eventPostProduct.observe(this,EventObserver{
+        productViewModel.eventPostProduct.observe(this,EventObserver{
             toast(it)
 
             if(it == "success"){
