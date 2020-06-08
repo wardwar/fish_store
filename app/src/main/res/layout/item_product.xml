@@ -38,13 +38,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@android:color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/itemProductBtnBuy"
+            app:layout_constraintBottom_toTopOf="@id/itemProductProvinsiText"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Rp.50.000 / 50 gr" />
+
+        <TextView
+            android:id="@+id/itemProductProvinsiText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toTopOf="@id/itemProductBtnBuy"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Bandung" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/itemProductBtnBuy"

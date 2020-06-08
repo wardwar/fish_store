@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="chipStyle" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily"> @font/poppins_medium</item>
+    </style>
+
 </resources>

@@ -46,6 +46,7 @@ class ProductAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             Picasso.get().load(fishImage.random()).into(itemProductImage)
             itemProductNameText.text = item.komuditi
             itemProductPriceText.text = item.priceGram
+            itemProductProvinsiText.text = item.area_provinsi?.capitalize()
         }
     }
 }

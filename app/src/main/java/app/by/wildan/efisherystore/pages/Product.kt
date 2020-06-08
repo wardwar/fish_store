@@ -2,7 +2,7 @@ package app.by.wildan.efisherystore.pages
 
 import app.by.wildan.efisherystore.utils.toDecimal
 
-data class Product(val komuditi: String?, val price: String?, val size: String?)
+data class Product(val komuditi: String?, val price: String?, val size: String?,val area_provinsi:String?)
 
 val Product.priceGram: String
     get() {

@@ -5,4 +5,11 @@
     <string name="main_label_selection">Ikan pilihan minggu ini</string>
     <string name="beli">Beli</string>
     <string name="main_label_product">Semua produk</string>
+    <string name="main_btn_search">Cari</string>
+    <string name="slide_up_filter_label">Filter Product</string>
+    <string name="slide_up_area_label">Filter berdasarkan area</string>
+    <string name="slide_up_komuditas_label">Filter berdasarkan komuditas</string>
+    <string name="slide_up_btn_filter">Terapkan Filter</string>
+    <string name="main_btn_add">Tambah Data</string>
+    <string name="slide_up_add_label">Tambah Produk</string>
 </resources>
